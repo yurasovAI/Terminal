@@ -1,0 +1,60 @@
+﻿<Page x:Class="TaskWPF.PrivateCabinet"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TaskWPF"
+      mc:Ignorable="d"
+      Title="PrivateCabinet" d:DesignHeight="800" d:DesignWidth="800" Background="#FF36474F" >
+
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.6*" />
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        
+        <StackPanel VerticalAlignment="Center"  Grid.Column="1" Grid.Row="1">
+            <Button Margin="0,0,0,30" x:Name="butCreate" Content="Печать" MinHeight="40" MaxHeight="50"/>
+            <Button Margin="0" x:Name="butOpen" Content="Сканирование" MinHeight="40" MaxHeight="50"  />
+            <Button Margin="0,30,0,0" x:Name="butSave" Content="Ксерокопия" MinHeight="40" MaxHeight="50" />
+        </StackPanel>
+
+        <Rectangle Fill="#FF273238" Height="80" Stroke="Black" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0,40,0,0" Grid.Row="0" Grid.ColumnSpan="3" MinHeight="100" MaxHeight="150" >
+            <Rectangle.Effect>
+                <DropShadowEffect BlurRadius="2" Direction="300" ShadowDepth="0"/>
+            </Rectangle.Effect>
+        </Rectangle>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.9*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <Label Grid.Column="1" Content="rrrr" Grid.Row="0" x:Name="userName" Foreground ="White" Margin="0, 0, 0, 0"  />
+                <Label Grid.Column="1" Content =" oooo" Grid.Row ="0" x:Name="userBalance" Margin="0,0,0,0" Foreground="White" />
+            </StackPanel>
+            
+            <Image Grid.Column="0" Grid.Row="0" x:Name="userImage" Margin="30" HorizontalAlignment="Center" VerticalAlignment="Top" />
+            
+        </Grid>
+        
+        <TextBlock Grid.Column="1" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0" Text="Student Print" Foreground="White" Padding="70,0,80,0"/>
+
+        <DataGrid HorizontalAlignment="Left" Grid.Column="2" Grid.Row="2" x:Name="dataGrid" Margin="0, 50, 20, 0" Visibility="Hidden"/>
+        <Button Grid.Column="2" Grid.Row="0" Content="Выход" Background="Brown" Foreground="Black" Margin="0" HorizontalAlignment="Right" VerticalAlignment="Top" Click="Button_Click"/>
+
+
+    </Grid>
+</Page>

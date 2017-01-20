@@ -1,0 +1,107 @@
+﻿<Page x:Class="TaskWPF.UserWindow"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TaskWPF"
+      mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="800"
+      Title="UserWindow" Background="#FF36474F">
+    <Page.Resources>
+        <ControlTemplate x:Key="validationBreaked">
+            <StackPanel Orientation="Horizontal">
+                <Border BorderBrush="Purple" BorderThickness="4">
+                    <AdornedElementPlaceholder/>
+                </Border>
+            </StackPanel>
+        </ControlTemplate>
+
+        <ControlTemplate TargetType="Button" x:Key="regButton">
+            <ControlTemplate.Triggers> 
+                <DataTrigger Binding="{Binding Path=IsRegEnableProp}" Value="True">
+                    <Setter Property="IsEnabled" Value="False"></Setter>
+                </DataTrigger>
+                
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style TargetType="TextBox">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip"
+                Value="{Binding RelativeSource={RelativeSource Self},
+                    Path=(Validation.Errors)[0].ErrorContent}" />
+                    <Setter Property="Foreground" Value="Red" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="blockStyle" TargetType="TextBlock">
+            <Style.Setters >
+                <Setter Property="Foreground" Value="Red"></Setter>
+                <Setter Property="FontSize" Value="12"></Setter>
+            </Style.Setters>
+        </Style>
+    </Page.Resources>
+
+    
+    
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.6*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Name="textBox1Stack" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1">
+            <TextBox  x:Name="username"  TextWrapping="Wrap" Margin="0,0,0,30"  Validation.ErrorTemplate="{StaticResource validationBreaked}"  Text="{Binding UsernameProp, Mode=TwoWay, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" MinHeight="40" MaxHeight="50"/>
+            <TextBox   x:Name="password" TextWrapping="Wrap"  Margin="0"  Validation.ErrorTemplate="{StaticResource validationBreaked}" Text="{Binding PasswordProp, Mode=TwoWay, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" MinHeight="40" MaxHeight="50"/>
+            <TextBox x:Name="balance" TextWrapping="Wrap"  Margin="0,30,0,0" 
+                 Validation.ErrorTemplate="{StaticResource validationBreaked}" Text="{Binding BalanceProp, Mode=TwoWay, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" MinHeight="40" MaxHeight="50"/>
+        </StackPanel>
+
+        
+        <StackPanel Name="label2Stack" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <Label Margin="0,0,0,40" x:Name="labelLogin" Content="Логин" Foreground="White"/>
+            <Label Margin="0"  x:Name="labelPass" Content="Пароль" Foreground="White"  />
+            <Label Margin="0,40,0,0" x:Name="labelBalance" Content="Баланс" Foreground="White"   />
+        </StackPanel>
+        
+        <StackPanel Name="textBlock1Stack" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left">
+            <TextBlock x:Name="blockLogin" Margin="0,0,0,30" MinHeight="40" MaxHeight="50" Style="{StaticResource blockStyle}" Text="{Binding Path=(Validation.Errors)[0].ErrorContent, ElementName=username}" TextWrapping="WrapWithOverflow" Padding="10,0,0,0"  />
+            <TextBlock  x:Name ="blockPassword" Margin="0" MinHeight="40" MaxHeight="50" Style="{StaticResource blockStyle}" Text="{Binding Path=(Validation.Errors)[0].ErrorContent, ElementName=password}" TextWrapping="WrapWithOverflow" Padding="10,0,0,0" />
+            <TextBlock  x:Name="blockBalance" Margin="0,27,0,0" MinHeight="40" MaxHeight="50" Style="{StaticResource blockStyle}" Text="{Binding Path=(Validation.Errors)[0].ErrorContent, ElementName=balance}" TextWrapping="WrapWithOverflow" Padding="10,0,0,0"/>
+        </StackPanel>
+
+        <StackPanel Name="button1Stack"  Grid.Column="1" Grid.Row="2" VerticalAlignment="Top">
+            <Button  x:Name="createUser" Content="Зарегестрироваться" Margin="0,0,0,30" HorizontalAlignment="Stretch" MinHeight="40" MaxHeight="50" Click="createUser_Click"/>
+            <Button  Margin="0" Content="Назад" Click="BackButton_Click" HorizontalAlignment="Stretch" MinHeight="40" MaxHeight="50" HorizontalContentAlignment="Center" />
+        </StackPanel>
+
+
+        <Grid Grid.Column="0" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1" Grid.Row="1"  x:Name="delete" Content="Удалить"  Margin="0" Click="delete_Click" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            <TextBox Grid.Column="0" Grid.Row="1" x:Name="textId"  Margin="0" TextWrapping="Wrap"  Validation.ErrorTemplate="{StaticResource validationBreaked}" HorizontalAlignment="Right" VerticalAlignment="Center" MinWidth="20" MaxWidth="40"/>
+            <Label Grid.ColumnSpan="3" Grid.Row="0" x:Name="labelDelete" Content="Удалить пользователя по ID" VerticalAlignment="Bottom" HorizontalAlignment="Left" Foreground="White" />
+        </Grid>
+
+
+        
+        
+        
+    </Grid>
+</Page>
