@@ -14,7 +14,9 @@ namespace TaskWPF
     {
 
       
-        string a;
+        string _cardCode;
+
+        
 
         public ClassUser(int id, string username, string password, int balance, string path)
         {
@@ -23,9 +25,18 @@ namespace TaskWPF
             PasswordProp = password;
             BalanceProp = balance;
             PathProp = path;
+
+            
         }
 
-        
+        // Валидация карточки
+        public string CardCode
+        {
+            set { _cardCode = value; }
+
+            get { return _cardCode; }
+        }
+
         public int IDProp
         {
             set

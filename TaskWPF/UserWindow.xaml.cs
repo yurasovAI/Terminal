@@ -36,7 +36,7 @@ namespace TaskWPF
         private int massiveCapacity = 0;
         string jsonTextBox;
         // Переменная для осуществления запрета на создание невалидного пользователя
-         public static bool validationTrigger = false;
+        public static bool validationTrigger = false;
         MD5 hash = MD5.Create();
         NavigationService nav;
 
@@ -61,6 +61,8 @@ namespace TaskWPF
             balance.DataContext = initiateValid;
             username.DataContext = initiateValid;
             password.DataContext = initiateValid;
+            // Валидация по карточке
+           
 
 
         }
@@ -72,24 +74,24 @@ namespace TaskWPF
         }
 
         
-        private bool AllowReg()
-        {
-            if (blockLogin.Text == string.Empty & blockPassword.Text == String.Empty & blockBalance.Text.ToString() == String.Empty)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        //private bool AllowReg()
+        //{
+        //    if (blockLogin.Text == string.Empty & blockPassword.Text == String.Empty & blockBalance.Text.ToString() == String.Empty)
+        //    {
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
 
     
 
         private void UserWindow_Loaded(object sender, RoutedEventArgs e)
         {
             nav = NavigationService.GetNavigationService(this);
-            createUser.IsEnabled = AllowReg();
+            //createUser.IsEnabled = AllowReg();
         }
 
 
@@ -159,8 +161,16 @@ namespace TaskWPF
 
         }
 
+        // Валидация по карточке
+        private void CreateUserByCardCode(string data)
+        {
+
+
+
+        }
 
         //Создание нового пользователя методом занесения данных в формате JSON  в виде массива
+
         private void createUser_Click(object sender, RoutedEventArgs e)
         {
             if (IsExistUserName(username.Text))
@@ -244,6 +254,7 @@ namespace TaskWPF
                 MessageBox.Show("Пользователя с таким ID не существует.", "Error");
             }
         }
+
 
         // Кнопка возврата на главную страницу
         private void BackButton_Click(object sender, RoutedEventArgs e)

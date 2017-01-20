@@ -65,6 +65,7 @@
       <DependentUpon>PrivateCabinet.xaml</DependentUpon>
     </Compile>
     <Compile Include="PropertyChangedNotification.cs" />
+    <Compile Include="SerialPortClass.cs" />
     <Compile Include="UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
